@@ -31,7 +31,7 @@ class Vector:
             return Vector([self.__vector[i] for i in range(slice.start, slice.stop, slice.step)])
         return NotImplemented  # Key should be either an integer or a slice object
 
-    def __abs__(self):
+    def __abs__(self):  # Euclidean norm with scaling to avoid underflow and overflow
         max_abs = abs(self.__vector[0])
         for i in range(self.__dimension):
             x = abs(self.__vector[i])
@@ -114,7 +114,7 @@ class Matrix:
         return cls([[1 if i == j else 0 for j in range(n)] for i in range(n)])
 
 
-def to_upper_hessenberg(A: List[List[float]]) -> (Matrix, Matrix):
+def to_upper_hessenberg(A: List[List[float]]) -> (Matrix, Matrix):  # O(n^3) algorithm
     n = len(A)
     B = Matrix(A)
     Q = Matrix.identity(n)
